@@ -16,6 +16,7 @@ Find the radius of the circle inside the unit square
 
 import numpy as np
 import time
+import math
 
 
 def findDistance(start, end):
@@ -53,19 +54,22 @@ for circle_radius in np.arange(0, 0.5, step=0.0001):
     do = []  # distances of points outside circle(to nearest edge)
     
     for point in points:       
-        dist_origin = findDistance(start=[0,0], end=point)
+#        dist_origin = findDistance(start=[0,0], end=point)
+        dist_origin = math.dist([0,0], point)
         
         if  dist_origin < circle_radius: # point is in circle
             di.append(dist_origin) 
         else:
-            do.append(findDistance(point, findNearestEdge(point)))
+#            do.append(findDistance(point, findNearestEdge(point)))
+            do.append(math.dist(point, findNearestEdge(point)))
+            
     mdi = np.mean(di) if len(di) > 0 else 0
     mdo = np.mean(do) if len(do) > 0 else 0
     
 #    print(f'Average distance to origin for points in circle = {np.mean(di):.4f}')
 #    print(f'Average distance to nearest edge for points outside circle = {np.mean(do):.4f}')
     
-    if abs(mdi - mdo) < 0.001:
+    if abs(mdo - mdi) < 0.001:
         print(f"Found match: mdi={mdi:.4f} mdo={mdo:.4f}\n")
         print(f"circle radius is {circle_radius:.4f}\n")
         

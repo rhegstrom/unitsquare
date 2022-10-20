@@ -45,7 +45,7 @@ def findNearestEdge(coord):
 
 prog_start_time = time.time()   
 # Generate 1000 random coordinates 
-points = np.random.default_rng().uniform(-0.5, 0.5, size=(2000,2))
+points = np.random.default_rng().uniform(-0.5, 0.5, size=(1000,2))
 
 low, high = 0, 0.5
 
@@ -65,13 +65,12 @@ while True:
     mdi = np.mean(di)
     mdo = np.mean(do)
     
-    print(f'ans = {ans}')
-    print(f'Average distance to origin for points in circle = {mdi:.4f}')
-    print(f'Average distance to nearest edge for points outside circle = {mdo:.4f}')
+    print(f'Average distance to origin for points in circle            = {mdi}')
+    print(f'Average distance to nearest edge for points outside circle = {mdo}')
     
-    if abs(mdi - mdo) <= 0.001:
-        print(f"Found match: mdi={mdi:.4f} mdo={mdo:.4f}\n")
-        print(f"circle radius is {ans:.4f}\n")
+    if abs(mdi - mdo) <= 0.0001:
+        print(f"Found match: mdi={mdi} mdo={mdo}\n")
+        print(f"circle radius is {ans:}\n")
         
         prog_end_time = time.time()
         print(f"Script took {prog_end_time-prog_start_time:.2f} sec to execute..")
